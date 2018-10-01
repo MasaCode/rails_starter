@@ -45,7 +45,7 @@ volumes:
 ```
 
 **Step 5 Create a project**
-- Create a project by `docker-compose run web rails new . --force --database=mysql`
+- Create a project by `docker-compose run web rails new . --force --database=mysql --webpack=vue --skip-coffee --skip-test`
 
 **Step 6 Build docker image**
 - Build you docker image by `docker-compose build`
