@@ -28,7 +28,7 @@ services:
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     volumes:
       - .:/rails_starter
-      - bundle:/usr/local/bundle:cached
+      - bundle-starter:/usr/local/bundle
     ports:
       - "3000:3000"
     depends_on:
@@ -37,5 +37,5 @@ services:
 volumes:
   rails_starter:
     driver: local
-  bundle:
+  bundle-starter:
     driver: local

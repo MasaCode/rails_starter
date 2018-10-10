@@ -34,6 +34,7 @@ web:
   command: bundle exec rails s -p 3000 -b '0.0.0.0'
   volumes:
     - .:/{Your project directory name}
+    - {your local bundle name}:/usr/local/bundle
   ports:
     - "3000:3000"
   depends_on:
@@ -41,6 +42,8 @@ web:
 
 volumes:
   {Your datastore name}:
+    driver: local
+  {your local bundle name}
     driver: local
 ```
 
