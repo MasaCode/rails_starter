@@ -8,55 +8,16 @@
 
 - You can clone it by `git clone https://github.com/MasaCode/rails_starter.git`
 
-**Step 2 Configure .env variables**
+**Step 2 Create a project**
+- Create a project by `docker-compose run app rails new . --force --database=mysql`
 
-- Rename `.env.example` to `.env` by running `mv .env.example .env`
-- Modify each MYSQL variable to adjust project
-
-**Step 3 Modify your Dockerfile to adjust project**
-
-- You need to modify Dockerfile's `APP_HOME` variable to your directory name
-```Dockerfile
-ENV APP_HOME /{your directory name}
-```
-
-**Step 4 Modify docker-compose.yml to adjust project**
-- Now you modify `web` container's volume and `datastore` name
-
-```yml
-datastore:
-  image: busybox
-  volumes:
-    - {Your datastore name}:/var/lib/mysql
-
-web:
-  build: .
-  command: bundle exec rails s -p 3000 -b '0.0.0.0'
-  volumes:
-    - .:/{Your project directory name}
-    - {your local bundle name}:/usr/local/bundle
-  ports:
-    - "3000:3000"
-  depends_on:
-    - db
-
-volumes:
-  {Your datastore name}:
-    driver: local
-  {your local bundle name}
-    driver: local
-```
-
-**Step 5 Create a project**
-- Create a project by `docker-compose run web rails new . --force --database=mysql`
-
-**Step 6 Build docker image**
+**Step 3 Build docker image**
 - Build you docker image by `docker-compose build`
 
-**Step 7 Start docker container**
+**Step 4 Start docker container**
 - Start docker container by `docker-compose up -d`
 
-**Step 8 Adjust your `config/database.yml`**
+**Step 5 Adjust your `config/database.yml`**
 - Modify `username`, `password`, `host`, `database` variables
 
 ```yml
@@ -73,8 +34,8 @@ development:
   database: {Your MYSQL_DATABASE}
 ```
 
-**Step 9 See rails project running**
-- Access to `localhost:3000` and see it running!
+**Step 6 See rails project running**
+- Access to `http://localhost` and see it running!
 
 
 ## How to set up already created project
@@ -89,7 +50,7 @@ development:
 - Start docker container by `docker-compose up -d`
 
 **Step 4 Migrate database structure**
-- Migrate database by `docker-compose run web rake db:migrate`
+- Migrate database by `docker-compose run app rake db:create db:migrate`
 
 **Step 5 See rails project running**
-- Access to `localhost:3000` and see it running!
+- Access to `http://localhost` and see it running!
